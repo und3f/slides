@@ -1,0 +1,7 @@
+psgi-app.*
+!psgi-app.tex
+!psgi-app.pdf
+mvc-scheme.*
+!mvc-scheme.dia
+!mvc-scheme.eps
+*.log
