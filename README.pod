@@ -1,10 +1,11 @@
 =encoding utf-8
 
-=head1 НАИМЕНОВАНИЕ
+=head1 SLIDES
 
-Материалы с воркшопа Black Perl 2011.
+=over 2
 
-=head1 psgi-app/
+=item "Построение PSGI-совместимых Web-fremework'ов"
 
-Построение PSGI-совместимых Web-framework'ов
-L<http://black-perl.org/bp2011/talk/146>.
+Black-Perl 2011, L<http://black-perl.org/bp2011/talk/146>
+
+=back
