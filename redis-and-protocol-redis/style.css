@@ -1,0 +1,20 @@
+code.redis.cmd {
+    display: inline;
+    color: red;
+}
+
+code.redis.rn {
+    display: inline;
+    color: #aaa;
+}
+
+code.briefcode {
+    font-size: 5px;
+    line-height: 5px;
+}
+
+code.smallcode {
+    font-size: 20px;
+    line-height: 20px;
+}
+

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Redis</title>
+  <meta name="author" content="Sergey Zasenko und3f" />
+  <link href="../chrome/impress.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="impress" class="impress-not-supported">
+    <div class="fallback-message">
+      Need other browser
+    </div>
+
+    <div id="title" class="step" data-x="0" data-y="0">
+      <q>
+        <h1>Redis</h1>
+        <div class="note">(REmote DIctionary Server)</div>
+        <div class="author">Sergey Zasenko
+          <a class="nick" href="http://und3f.com">@und3f</a>
+        </div>
+      </q>
+    </div>
+
+    <div id="description" class="step slide" data-x="0" data-y="1000">
+      <q>
+        <ul>
+          <li>Key-value storage</li>
+          <li>All data lives in memory</li>
+          <li>Fast</li>
+          <li>Light-weight</li>
+        </ul>
+      </q>
+    </div>
+
+    <div id="advantages" class="step slide" data-x="1000" data-y="1000">
+      <q>
+        <ul>
+          <li>Advanced data structures</li>
+          <li>Atomic operations, transactions</li>
+          <li>Pub/Sub</li>
+          <li>Persistent</li>
+        </ul>
+      </q>
+    </div>
+
+    <div id="data-structures" class="step slide" data-x="0" data-y="2000">
+      <q>Data structures:
+        <ul>
+          <li>Strings (blob)</li>
+          <li>Lists</li>
+          <li>Hashes</li>
+          <li>Sets</li>
+          <li>Sorted sets</li>
+        </ul>
+      </q>
+    </div>
+
+    <div id="data-structures-string" class="step slide" data-x="1000" data-y="2000">
+      <q>Strings
+        <ul>
+          <li>binary safe
+          <li>maximum size 512MB</li>
+        </ul>
+      </q><br />
+
+      <code>
+        &gt; set foo bar<br/>
+        OK<br/>
+        &gt; get foo<br/>
+        "bar"<br/>
+      </code>
+    </div>
+
+    <div id="data-structures-lists" class="step slide" data-x="2000" data-y="2000">
+      <q>Lists
+        <ul>
+          <li>List of strings sorted by insertion order</li>
+          <li>handy for queues</li>
+        </ul>
+      </q>
+
+      <code>
+        &gt; LPUSH tasks-queue task1 task2<br/>
+        (integer) 2
+      </code>
+
+      <code>
+        &gt; LPOP tasks-queue<br/>
+        "bar"<br/>
+        &gt; LPOP tasks-queue1<br/>
+        "foo"<br/>
+        &gt; LPOP tasks-queue<br/>
+        (nil)
+      </code>
+    </div>
+
+    <div id="data-structures-hashes" class="step slide" data-x="3000" data-y="2000">
+      <q>Hashes
+        <ul>
+          <li>associate string fields to string values</li>
+          <li>handy for representing objects</li>
+        </ul>
+      </q><br />
+
+      <code>
+        &gt; HMSET hash key1 value2 key2 value2<br/>
+        OK<br/>
+        &gt; HGETALL hash<br/>
+        1) "key1"<br/>
+        2) "value2"<br/>
+        3) "key2"<br/>
+        4) "value2"
+      </code>
+    </div>
+
+    <div id="data-structures-sets" class="step slide" data-x="0000" data-y="3000">
+      <q>Sets
+        <ul>
+          <li>unordered collection of Strings</li>
+          <li>handy representing relations, tag system</li>
+        </ul></q><br/>
+
+        <code>
+          &gt; SADD tags redis perl<br/>
+          (integer) 2<br/>
+          &gt; SMEMBERS tags<br/>
+          1) "perl"<br/>
+          2) "redis"<br/>
+        </code>
+      </div>
+
+    <div id="data-structures-sorted-sets" class="step slide" data-x="1000" data-y="3000">
+      <q>Sorted sets
+        <ul>
+          <li>sets with score, associated to every member</li>
+          <li>handy for indices</li>
+        </ul>
+      </q><br/>
+    </div>
+
+    <div id="data-structures-sorted-sets-code" class="step slide" data-x="2000" data-y="3000">
+      At every request application stores <em>time</em>→<em>request number</em> pair:
+      <code>
+        &gt; ZADD period-counter 1329155260 149657<br/>
+        (integer) 1
+      </code>
+
+      <code>
+        &gt; ZADD period-counter 1329155511 149659<br/>
+        (integer) 1
+      </code>
+
+      Before each action it checks number of action performed for last time:
+      <code>
+        &gt; ZREMRANGEBYSCORE period-counter 0 1329155261<br/>
+        (integer) 1<br/>
+        &gt;ZCARD period-counter<br/>
+        (integer) 1
+      </code>
+    </div>
+
+    <div id="atomic" class="step slide" data-x="0" data-y="4000">
+      <q>Atomic operations:
+        <ul>
+          <li>Redis is single threaded</li>
+          <li>Allows to create transactions</li>
+        </ul></q><br/>
+
+        <code>
+          &gt; MULTI<br/>
+          OK<br/>
+          &gt; SET key value<br/>
+          QUEUED<br/>
+          &gt; EXPIRE key 20<br/>
+          QUEUED<br/>
+          &gt; EXEC<br/>
+          1) OK<br/>
+          2) (integer) 1<br/>
+          </code>
+        </div>
+
+    <div id="persistence" class="step slide" data-x="1000" data-y="4000">
+      <q>Persistence
+        <ul>
+          <li>RDB — snapshot files</li>
+          <li>AOF (append only file) — works like a journal</li>
+        </ul>
+      </q>
+    </div>
+
+    <div id="replication" class="step slide" data-x="2000" data-y="4000">
+      <q>Replication
+        <ul>
+          <li>Slaves can be used for scalability or redundancy</li>
+          <li>Replication is non-blocking on the master, but blocking on the slave</li>
+        </ul>
+      </q>
+    </div>
+
+    <div id="overview" class="step" data-x="1502" data-y="2166" data-scale="6">
+    </div>
+
+  </div>
+  <script src="../chrome/impress.js/js/impress.js"></script>
+</body>
+</html>
