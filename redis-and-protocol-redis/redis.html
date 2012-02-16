@@ -45,6 +45,21 @@
       </q>
     </div>
 
+    <div id="who-uses" class="step slide" data-x="2000" data-y="1000">
+      <q>
+        Already used at production
+        <ul>
+          <li>craiglist</li>
+          <li>flickr</li>
+          <li>digg</li>
+          <li>disqus</li>
+          <li>stack oveflow</li>
+          <li>youporn</li>
+        </ul>
+      </q>
+    </div>
+
+
     <div id="data-structures" class="step slide" data-x="0" data-y="2000">
       <q>Data structures:
         <ul>
@@ -82,17 +97,16 @@
       </q>
 
       <code>
-        &gt; LPUSH tasks-queue task1 task2<br/>
-        (integer) 2
+        &gt; RPUSH tasks-queue task1<br/>
+        (integer) 1
       </code>
 
       <code>
-        &gt; LPOP tasks-queue<br/>
-        "bar"<br/>
-        &gt; LPOP tasks-queue1<br/>
-        "foo"<br/>
-        &gt; LPOP tasks-queue<br/>
-        (nil)
+        &gt; BLPOP tasks-queue 100<br/>
+        1) "tasks-queue"<br/>
+        2) "task1"<br/>
+        &gt; BLPOP tasks-queue 100<br/>
+        # wait data
       </code>
     </div>
 
