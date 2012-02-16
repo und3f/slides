@@ -10,7 +10,8 @@
 <body>
   <div id="impress" class="impress-not-supported">
     <div class="fallback-message">
-      Need other browser
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b> or <b>Safari</b> browser. Firefox 10 (to be released soon) will also handle it.</p>
     </div>
 
     <div id="title" class="step" data-x="0" data-y="0">
@@ -215,8 +216,17 @@
 
     <div id="overview" class="step" data-x="1502" data-y="2166" data-scale="6">
     </div>
-
   </div>
+
+  <div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+  </div>
+  <script>
+    if ("ontouchstart" in document.documentElement) { 
+      document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    }
+  </script>
+
   <script src="../chrome/impress.js/js/impress.js"></script>
 </body>
 </html>
