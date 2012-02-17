@@ -10,7 +10,7 @@
 
 Kiev Perl Mongers technical meeting, 16 Feb 2012
 
-=item "Построение PSGI-совместимых Web-fremework'ов"
+=item "Построение PSGI-совместимых Web-framework'ов"
 
 Black-Perl 2011, L<http://black-perl.org/bp2011/talk/146>
 
